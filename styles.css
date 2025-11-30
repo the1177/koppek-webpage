@@ -30,9 +30,15 @@
 }
 
 html {
-    scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+/* Smooth scroll only on desktop */
+@media (min-width: 769px) {
+    html {
+        scroll-behavior: smooth;
+    }
 }
 
 body {
