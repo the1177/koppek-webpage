@@ -101,8 +101,23 @@
                 <p class="hero-description">
                     KoppeK is a new kind of offensive security companion that fuses your favorite hacking tools with modern <span class="highlight">LLM intelligence</span> and clean automation – all in one place. No more juggling terminals, scripts, notes, and tabbed chaos. Just one battle station where you think like an attacker and your tools move with you.
                 </p>
+                <button class="rainbow-btn" id="videoBtn">
+                    <span class="rainbow-btn-text">▶ See Video</span>
+                </button>
             </div>
         </section>
+
+        <!-- Video Modal -->
+        <div class="video-modal" id="videoModal">
+            <div class="video-modal-backdrop" id="videoModalBackdrop"></div>
+            <div class="video-modal-content">
+                <button class="video-modal-close" id="videoModalClose">✕</button>
+                <video class="promo-video" id="promoVideo" controls>
+                    <source src="assets/prom.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
 
         <!-- App Screenshot Section - Scroll Animated -->
         <section class="app-preview-section">

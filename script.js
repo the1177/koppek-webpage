@@ -200,6 +200,45 @@
     }
 
     // =========================================
+    // Video Modal
+    // =========================================
+    
+    function initVideoModal() {
+        const videoBtn = document.getElementById('videoBtn');
+        const videoModal = document.getElementById('videoModal');
+        const videoModalBackdrop = document.getElementById('videoModalBackdrop');
+        const videoModalClose = document.getElementById('videoModalClose');
+        const promoVideo = document.getElementById('promoVideo');
+        
+        if (!videoBtn || !videoModal) return;
+        
+        // Open modal
+        videoBtn.addEventListener('click', () => {
+            videoModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            promoVideo.play();
+        });
+        
+        // Close modal functions
+        function closeModal() {
+            videoModal.classList.remove('active');
+            document.body.style.overflow = '';
+            promoVideo.pause();
+            promoVideo.currentTime = 0;
+        }
+        
+        videoModalBackdrop.addEventListener('click', closeModal);
+        videoModalClose.addEventListener('click', closeModal);
+        
+        // Close on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && videoModal.classList.contains('active')) {
+                closeModal();
+            }
+        });
+    }
+
+    // =========================================
     // Initialize Everything
     // =========================================
     
@@ -210,6 +249,9 @@
         
         // Initialize video with fallback
         initVideoFallback();
+        
+        // Initialize video modal
+        initVideoModal();
         
         // Initialize scroll animations
         initScrollReveal();
