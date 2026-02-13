@@ -93,17 +93,28 @@
                 </video>
                 <!-- Static fallback if video fails -->
                 <img src="assets/logo.png" alt="KoppeK Logo" class="logo-fallback" id="logoFallback" style="display: none;">
-                <h1 class="title">KoppeK</h1>
-                <p class="tagline">Where Human Creativity Meets Automated Offense</p>
+                <h1 class="title"><span class="rainbow-text">KoppeK</span></h1>
+                <p class="tagline">Your offensive security <span class="rainbow-text">battle station</span>.</p>
                 <p class="subtitle">
-                    Pentesting is about to get an <span class="highlight-alt">unfair advantage</span>.
+                    Automation, context, and AI — <span class="highlight-alt">under your control</span>.
                 </p>
                 <p class="hero-description">
-                    KoppeK is a new kind of offensive security companion that fuses your favorite hacking tools with modern <span class="highlight">LLM intelligence</span> and clean automation – all in one place. No more juggling terminals, scripts, notes, and tabbed chaos. Just one battle station where you think like an attacker and your tools move with you.
+                    KoppeK is a workflow layer for real engagements: run repeatable tasks, capture evidence automatically, 
+                    and use AI to triage noisy output into actionable next steps — while you stay the operator.
                 </p>
-                <button class="rainbow-btn" id="videoBtn">
-                    <span class="rainbow-btn-text">▶ See Video</span>
-                </button>
+                <div class="hero-bullets">
+                    <div class="hero-bullet">One workspace for scope, runs, notes, and artifacts</div>
+                    <div class="hero-bullet">Reproducible by default: every run saved, replayable, and exportable</div>
+                    <div class="hero-bullet">AI summaries and hypotheses you can verify (not "one-click hacking")</div>
+                </div>
+                <div class="hero-cta">
+                    <button class="rainbow-btn" id="videoBtn">
+                        <span class="rainbow-btn-text">Watch Demo</span>
+                    </button>
+                    <a href="mailto:admin@koppek.com?subject=Private%20Beta%20Access%20Request" class="secondary-btn">
+                        <span>Join Private Beta</span>
+                    </a>
+                </div>
             </div>
         </section>
 
@@ -119,19 +130,321 @@
             </div>
         </div>
 
-        <!-- App Screenshot Section - Scroll Animated -->
-        <section class="app-preview-section">
-            <div class="app-preview-container" id="appPreview">
-                <img src="assets/screenshot.png" alt="KoppeK App Screenshot" class="app-screenshot">
+        <!-- Why KoppeK Section -->
+        <section class="why-section">
+            <div class="why-wrapper reveal">
+                <h2 class="section-title">Why KoppeK exists</h2>
+                <p class="feature-lead">
+                    Pentesting isn't hard because of tools — it's hard because of <span class="highlight">context switching</span>.
+                    Terminals, scripts, notes, screenshots, payloads, chat logs… and then you still have to report.
+                </p>
+                <div class="why-grid">
+                    <div class="why-card">
+                        <h4>Less chaos</h4>
+                        <p>Scope, runs, notes, and artifacts in one engagement workspace.</p>
+                    </div>
+                    <div class="why-card">
+                        <h4>More rigor</h4>
+                        <p>Reproducible runs and an audit trail you can defend.</p>
+                    </div>
+                    <div class="why-card">
+                        <h4>Faster decisions</h4>
+                        <p>AI turns noisy output into hypotheses and next steps you can verify.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Screenshots Carousel -->
+        <section class="carousel-section">
+            <div class="carousel-wrapper reveal">
+                <h2 class="section-title">See KoppeK in Action</h2>
+                <p class="carousel-intro">Real workflows. Real evidence. Real operator control.</p>
+                
+                <div class="carousel-container">
+                    <button class="carousel-btn carousel-btn-prev" id="carouselPrev" aria-label="Previous slide">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="15 18 9 12 15 6"></polyline>
+                        </svg>
+                    </button>
+                    
+                    <div class="carousel-track-container">
+                        <div class="carousel-track" id="carouselTrack">
+                            <div class="carousel-slide">
+                                <div class="carousel-image-wrapper">
+                                    <img src="assets/nmap.png" alt="Repeatable Runs" class="carousel-image">
+                                </div>
+                                <div class="carousel-caption">
+                                    <h3>Repeatable Runs</h3>
+                                    <p>Standardized profiles with live output — saved automatically for replays and re-tests.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="carousel-slide">
+                                <div class="carousel-image-wrapper">
+                                    <img src="assets/analysis.png" alt="Prioritize & Keep Evidence" class="carousel-image">
+                                </div>
+                                <div class="carousel-caption">
+                                    <h3>Prioritize & Keep Evidence</h3>
+                                    <p>Every finding tracked, every artifact captured — ready for reporting and re-test.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="carousel-slide">
+                                <div class="carousel-image-wrapper">
+                                    <img src="assets/toolsManager.png" alt="Standardize Your Environment" class="carousel-image">
+                                </div>
+                                <div class="carousel-caption">
+                                    <h3>Standardize Your Environment</h3>
+                                    <p>Consistent tool setup across engagements — install once, use everywhere.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="carousel-slide">
+                                <div class="carousel-image-wrapper">
+                                    <img src="assets/LLMintegration.png" alt="Multi-LLM Support" class="carousel-image">
+                                </div>
+                                <div class="carousel-caption">
+                                    <h3>Multi-LLM Support</h3>
+                                    <p>Connect Claude, OpenAI, Anthropic API, or run local models with Ollama.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="carousel-btn carousel-btn-next" id="carouselNext" aria-label="Next slide">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </button>
+                </div>
+                
+                <div class="carousel-dots" id="carouselDots">
+                    <button class="carousel-dot active" data-index="0" aria-label="Go to slide 1"></button>
+                    <button class="carousel-dot" data-index="1" aria-label="Go to slide 2"></button>
+                    <button class="carousel-dot" data-index="2" aria-label="Go to slide 3"></button>
+                    <button class="carousel-dot" data-index="3" aria-label="Go to slide 4"></button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Auto PWNR Section -->
+        <section class="autopwnr-section">
+            <div class="autopwnr-wrapper reveal">
+                <div class="autopwnr-badge">Advanced Feature</div>
+                <h2 class="section-title"><span class="rainbow-text">LLM-Driven</span> <span class="highlight-alt">Automation</span></h2>
+                <p class="autopwnr-lead">
+                    When you're ready to scale, let the AI take the wheel — with proper authorization and full operator oversight.
+                </p>
+                
+                <div class="autopwnr-showcase-large">
+                    <div class="autopwnr-image-wrapper-large">
+                        <img src="assets/autoPWNR.png" alt="Auto PWNR - LLM-driven automated penetration testing" class="autopwnr-image">
+                    </div>
+                    <div class="autopwnr-features-row">
+                        <div class="autopwnr-feature-card">
+                            <span class="feature-icon">🎯</span>
+                            <h4>Targeted Automation</h4>
+                            <p>Select which tools the AI can use and define scope boundaries before starting.</p>
+                        </div>
+                        <div class="autopwnr-feature-card">
+                            <span class="feature-icon">🧠</span>
+                            <h4>AI Reasoning Visible</h4>
+                            <p>Watch the LLM's thinking process in real-time — full transparency on every decision.</p>
+                        </div>
+                        <div class="autopwnr-feature-card">
+                            <span class="feature-icon">🛡️</span>
+                            <h4>Authorization Required</h4>
+                            <p>Exploitation requires explicit opt-in. Built for authorized testing only.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="llm-support">
+                    <h3 class="llm-support-title">Supported <span class="rainbow-text">LLM Providers</span></h3>
+                    <div class="llm-grid">
+                        <div class="llm-item">
+                            <div class="llm-icon claude-icon">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+                                </svg>
+                            </div>
+                            <span class="llm-name">Claude Code</span>
+                            <span class="llm-desc">Native integration</span>
+                        </div>
+                        <div class="llm-item">
+                            <div class="llm-icon openai-icon">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1686a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4944zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1685a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.872zm16.5963 3.8558L13.1038 8.364l2.0201-1.1638a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.4062-.6813zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L9.409 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4992 4.4992 0 0 1 6.6802 4.66zM8.3065 12.863l-2.02-1.1638a.0804.0804 0 0 1-.038-.0567V6.0742a4.4992 4.4992 0 0 1 7.3757-3.4537l-.142.0805L8.704 5.459a.7948.7948 0 0 0-.3927.6813zm1.0976-2.3654l2.602-1.4998 2.6069 1.4998v2.9994l-2.5974 1.4997-2.6067-1.4997Z"/>
+                                </svg>
+                            </div>
+                            <span class="llm-name">OpenAI API</span>
+                            <span class="llm-desc">CodexCLI integration</span>
+                        </div>
+                        <div class="llm-item">
+                            <div class="llm-icon anthropic-icon">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M17.304 3.542h-3.048l6.696 16.916h3.048L17.304 3.542zM6.696 3.542L0 20.458h3.153l1.386-3.609h6.729l1.386 3.609h3.153L9.111 3.542H6.696zm.458 10.762l2.639-6.87 2.64 6.87H7.154z"/>
+                                </svg>
+                            </div>
+                            <span class="llm-name">Anthropic API</span>
+                            <span class="llm-desc">Opus/Sonnet integration</span>
+                        </div>
+                        <div class="llm-item">
+                            <div class="llm-icon ollama-icon">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
+                                </svg>
+                            </div>
+                            <span class="llm-name">Ollama</span>
+                            <span class="llm-desc">Local models, check documentation</span>
+                        </div>
+                    </div>
+                    <p class="llm-note">Bring your own API keys. Your prompts, your control.</p>
+                </div>
+
+                <!-- Report Sample -->
+                <div class="report-sample">
+                    <h3 class="report-sample-title">Auto-Generated Assessment Report</h3>
+                    <p class="report-sample-desc">Every session produces a complete markdown report with findings, evidence, and AI reasoning — ready for your deliverables.</p>
+                    <div class="report-code-block">
+                        <div class="report-header">
+                            <span class="report-filename">autopwnr-[REDACTED]-session.md</span>
+                            <span class="report-badge">Generated Report</span>
+                        </div>
+                        <pre class="report-content"><code><span class="report-comment"># Auto PWNR Security Assessment Report</span>
+
+<span class="report-key">Target:</span> [REDACTED].xxx.xxx.xxx
+<span class="report-key">Duration:</span> 6 minutes
+<span class="report-key">Status:</span> COMPLETE
+
+<span class="report-section">## Executive Summary</span>
+| Severity | Count |
+|----------|-------|
+| Critical | 0     |
+| High     | 0     |
+| Medium   | 1     |
+| Low      | 1     |
+
+<span class="report-section">## AI Reasoning Log</span>
+
+<span class="report-thinking">🤖 Assistant:</span>
+<span class="report-quote">"Initial scan reveals two open ports. Port 3389/tcp shows as 
+'tcpwrapped' - TCP handshake completed but service closed 
+connection. Could be host-based firewall or TCP wrappers.
+
+<span class="report-highlight">I need more information. Let me run a more aggressive scan 
+with additional scripts targeting these specific ports...</span>"</span>
+
+<span class="report-step">✅ nmap - Targeted script scan on ports 25, 3389</span>
+<span class="report-cmd">Command: nmap -sV -sC --script=rdp-vuln-ms12-020 -p 25,3389</span>
+
+<span class="report-thinking">🤖 Assistant:</span>
+<span class="report-quote">"Port 3389 now showing as 'filtered' rather than 'open'. 
+This is inconsistent with the first scan — <span class="report-highlight">the host may have 
+adaptive filtering</span>. Let me try a wider port scan to find 
+services on non-standard ports..."</span>
+
+<span class="report-step">✅ nmap - Wide SYN scan of top 10000 ports</span>
+<span class="report-step">✅ nmap - Full 65535 TCP port scan</span>
+<span class="report-step">✅ sqlmap - SQL injection on /api/users</span>
+
+<span class="report-section">## Findings</span>
+
+<span class="report-finding-critical">### 🔴 SQL Injection - Authentication Bypass</span>
+<span class="report-key">Severity:</span> CRITICAL
+<span class="report-key">Endpoint:</span> <span class="report-evidence">POST /api/login</span>
+<span class="report-key">Payload:</span> <span class="report-evidence">' OR '1'='1' --</span>
+
+<span class="report-thinking">🤖 Exploitation:</span>
+<span class="report-quote">"<span class="report-highlight">SQLi confirmed.</span> Extracted 3 admin credentials from users table.
+Recommending password reset and parameterized queries."</span></code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Alpha Success Banner -->
+        <section class="alpha-success-section">
+            <div class="alpha-success-wrapper reveal">
+                <div class="success-badge"><span class="rainbow-text">Alpha Complete</span></div>
+                <h2 class="section-title">Alpha Testing Was a <span class="rainbow-text">Success</span></h2>
+                <p class="alpha-description">
+                    We ran our initial Alpha with a select group of testers, and the results exceeded expectations. 
+                    The feedback has been invaluable - we've gathered insights, squashed bugs, and refined the experience.
+                </p>
+                <div class="alpha-changes">
+                    <div class="alpha-change">Stability improvements and faster container startup</div>
+                    <div class="alpha-change">Cleaner workflow: runs → notes → evidence in one place</div>
+                    <div class="alpha-change">Better exports: artifacts and history ready for reporting</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- User Reviews Section - Carousel -->
+        <section class="reviews-section">
+            <div class="reviews-wrapper reveal">
+                <h2 class="section-title">What Alpha Testers Are Saying</h2>
+                <div class="reviews-carousel-container">
+                    <button class="reviews-carousel-btn prev" aria-label="Previous review">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="15,18 9,12 15,6"></polyline>
+                        </svg>
+                    </button>
+                    <div class="reviews-carousel-track">
+                        <div class="review-slide active">
+                            <div class="review-card">
+                                <p class="review-text">"Can't wait to see where this goes. Congrats KoppeK Team for pulling such a beautiful tool together!"</p>
+                                <div class="review-author">
+                                    <span class="author-name">Pentester</span>
+                                    <span class="author-title">Alpha Tester</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review-slide">
+                            <div class="review-card">
+                                <p class="review-text">"Alpha blew my mind. KoppeK is going places. Nuff said. You can add this to your review list."</p>
+                                <div class="review-author">
+                                    <span class="author-name">Security Researcher</span>
+                                    <span class="author-title">Alpha Tester</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review-slide">
+                            <div class="review-card">
+                                <p class="review-text">"The AI integration is exactly what pentesting needed. Left feedback on adding more, but overall looking great!! Excited for beta!"</p>
+                                <div class="review-author">
+                                    <span class="author-name">Red Teamer</span>
+                                    <span class="author-title">Alpha Tester</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review-slide">
+                            <div class="review-card">
+                                <p class="review-text">"I thought KoppeK was just an nmap UI, oh man I was stupid to think so... this is <span class="rainbow-text">fire</span> 🔥"</p>
+                                <div class="review-author">
+                                    <span class="author-name">Bug Bounty Hunter</span>
+                                    <span class="author-title">Alpha Tester</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="reviews-carousel-btn next" aria-label="Next review">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="9,6 15,12 9,18"></polyline>
+                        </svg>
+                    </button>
+                </div>
+                <div class="reviews-carousel-dots"></div>
             </div>
         </section>
 
         <!-- Countdown Section -->
         <section class="countdown-section">
             <div class="countdown-wrapper reveal">
-                <h2 class="section-title">Launch Countdown</h2>
-                <p class="countdown-intro">🚀 KoppeK is coming.</p>
-                <p class="countdown-tagline">The fuse is lit. The countdown has started.</p>
+                <h2 class="section-title"><span class="rainbow-text">Private Beta</span> Countdown</h2>
+                <p class="countdown-intro">🚀 Private Beta is coming.</p>
+                <p class="countdown-tagline">We listened. We improved. Now we're ready for the next phase.</p>
                 
                 <div class="countdown" id="countdown">
                     <div class="countdown-item">
@@ -155,55 +468,200 @@
                     </div>
                 </div>
                 
-                <p class="launch-date">December 24, 2025</p>
-                <p class="countdown-cta">Stay close, grab your seat on the breach team, and be among the first to plug AI into your offensive workflow.</p>
+                <p class="launch-date">March 27, 2026</p>
+                <p class="countdown-cta">Be among the first to experience the next evolution of offensive security tooling.</p>
+                
+                <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" class="beta-signup-btn">
+                    <span class="beta-btn-text">Sign Up for Private Beta</span>
+                </a>
             </div>
         </section>
 
-        <!-- Features Section 1: Recon -->
+        <!-- Capabilities Section -->
         <section class="feature-section">
             <div class="feature-content reveal">
-                <h2 class="feature-headline">Turn Recon into a <span class="highlight">Conversation</span></h2>
-                <p class="feature-lead">Imagine telling an assistant what you're trying to break, not just what command to run.</p>
-                <p class="feature-description">
-                    KoppeK sits between you, your toolbox, and a smart LLM engine that helps you:
+                <h2 class="feature-headline">What <span class="rainbow-text">KoppeK</span> Actually Does</h2>
+                <p class="feature-lead">
+                    KoppeK isn't a list of tools. It's a workflow layer that keeps your assessment fast, organized, and reproducible.
                 </p>
-                <ul class="feature-list">
-                    <li>Orchestrate complex recon flows without losing track of anything</li>
-                    <li>Turn raw output into structured insight, patterns, and leads</li>
-                    <li>Get suggested next steps while you stay in full control</li>
-                </ul>
-                <p class="feature-tagline">You stay the operator. <span class="highlight-alt">KoppeK becomes your co-pilot.</span></p>
+
+                <div class="capabilities-grid">
+                    <div class="capability-card">
+                        <div class="capability-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                            </svg>
+                        </div>
+                        <span class="capability-name">Engagement Workspace</span>
+                        <span class="capability-desc">Targets, scope, credentials, notes, and artifacts—organized like a real assessment.</span>
+                    </div>
+                    <div class="capability-card">
+                        <div class="capability-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polygon points="10 8 16 12 10 16 10 8"></polygon>
+                            </svg>
+                        </div>
+                        <span class="capability-name">Run Orchestration</span>
+                        <span class="capability-desc">Launch tasks with consistent profiles, capture stdout/stderr, and keep history you can replay.</span>
+                    </div>
+                    <div class="capability-card">
+                        <div class="capability-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                                <polyline points="7.5 4.21 12 6.81 16.5 4.21"></polyline>
+                                <polyline points="7.5 19.79 7.5 14.6 3 12"></polyline>
+                                <polyline points="21 12 16.5 14.6 16.5 19.79"></polyline>
+                                <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                                <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                            </svg>
+                        </div>
+                        <span class="capability-name">AI Triage & Summaries</span>
+                        <span class="capability-desc">Turn noisy output into prioritized issues, hypotheses, and verification steps.</span>
+                    </div>
+                    <div class="capability-card">
+                        <div class="capability-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                <polyline points="14 2 14 8 20 8"></polyline>
+                                <line x1="16" y1="13" x2="8" y2="13"></line>
+                                <line x1="16" y1="17" x2="8" y2="17"></line>
+                                <polyline points="10 9 9 9 8 9"></polyline>
+                            </svg>
+                        </div>
+                        <span class="capability-name">Evidence & Audit Trail</span>
+                        <span class="capability-desc">Screenshots, logs, payloads, timestamps—ready for reporting and re-test.</span>
+                    </div>
+                    <div class="capability-card">
+                        <div class="capability-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                            </svg>
+                        </div>
+                        <span class="capability-name">Knowledge Layer</span>
+                        <span class="capability-desc">Bring your own playbooks and internal notes; get suggestions grounded in your methodology.</span>
+                    </div>
+                    <div class="capability-card">
+                        <div class="capability-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                                <polyline points="9 12 11 14 15 10"></polyline>
+                            </svg>
+                        </div>
+                        <span class="capability-name">Responsible Guardrails</span>
+                        <span class="capability-desc">Operator confirmations, scope-aware behavior, and safety controls for authorized testing.</span>
+                    </div>
+                </div>
+
+                <p class="feature-tagline">
+                    You stay the operator. <span class="highlight-alt">KoppeK keeps you fast, organized, and consistent.</span>
+                </p>
             </div>
         </section>
 
-        <!-- Features Section 2: Automation -->
+        <!-- Workflow Section -->
         <section class="feature-section alt-bg">
             <div class="feature-content reveal">
-                <h2 class="feature-headline">Automation Without Losing the <span class="highlight-alt">Fun</span></h2>
-                <p class="feature-lead">We're not here to replace the thrill of discovery – we're here to remove the boring parts:</p>
-                <ul class="feature-list">
-                    <li><strong>Less copy-paste,</strong> more signal</li>
-                    <li><strong>Less "what did I run again?",</strong> more clarity</li>
-                    <li><strong>Less redoing basics,</strong> more time for deep, creative attacks</li>
-                </ul>
-                <p class="feature-tagline">You decide the strategy; <span class="highlight">KoppeK helps execute, organize, and amplify it.</span></p>
+                <h2 class="feature-headline">From target to report—<span class="highlight-alt">without the chaos</span></h2>
+                <p class="feature-lead">
+                    A clean loop you can repeat across engagements, with everything captured along the way.
+                </p>
+
+                <div class="workflow-timeline">
+                    <div class="workflow-step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Define Scope</h4>
+                            <p>Targets, rules of engagement, credentials, constraints</p>
+                        </div>
+                    </div>
+                    <div class="workflow-connector"></div>
+                    <div class="workflow-step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Run Discovery</h4>
+                            <p>Structured, repeatable profiles with live output</p>
+                        </div>
+                    </div>
+                    <div class="workflow-connector"></div>
+                    <div class="workflow-step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>Triage</h4>
+                            <p>AI summary + your verification steps</p>
+                        </div>
+                    </div>
+                    <div class="workflow-connector"></div>
+                    <div class="workflow-step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4>Validate</h4>
+                            <p>Evidence capture + reproducible steps</p>
+                        </div>
+                    </div>
+                    <div class="workflow-connector"></div>
+                    <div class="workflow-step">
+                        <div class="step-number">5</div>
+                        <div class="step-content">
+                            <h4>Report & Re-test</h4>
+                            <p>Draft findings, remediation notes, replayable checks</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <!-- Features Section 3: Built for Hackers -->
+        <!-- Trust Section -->
         <section class="feature-section">
             <div class="feature-content reveal">
-                <h2 class="feature-headline">Built for <span class="highlight">Hackers</span>, Not Tourists</h2>
-                <p class="feature-lead">KoppeK isn't a "scan and pray" toy.</p>
-                <p class="feature-description">
-                    It's designed for people who already know how to break things – and want a sharper edge:
+                <h2 class="feature-headline">Built for <span class="highlight">real engagements</span></h2>
+                <p class="feature-lead">
+                    Privacy-conscious by design: bring your own keys, keep artifacts in your environment, and stay in control.
                 </p>
-                <ul class="feature-list">
-                    <li>A home for your workflow, your style, your shortcuts</li>
-                    <li>A place where CLI power, visual feedback, and AI insight converge</li>
-                    <li>A platform that grows with your methodology, not against it</li>
-                </ul>
+
+                <div class="trust-grid">
+                    <div class="trust-block">
+                        <h4 class="trust-title">Privacy & Control</h4>
+                        <ul class="trust-list">
+                            <li>Local-first workflow where possible</li>
+                            <li>Bring-your-own API keys and models</li>
+                            <li>Clear artifact storage paths</li>
+                            <li>Exportable history and evidence</li>
+                        </ul>
+                    </div>
+                    <div class="trust-block">
+                        <h4 class="trust-title">Built for Authorized Testing</h4>
+                        <ul class="trust-list">
+                            <li>Operator-in-the-loop confirmations</li>
+                            <li>Scope reminders and guardrails</li>
+                            <li>Designed for professional engagements</li>
+                            <li>Not "one-click hacking"</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq-section">
+            <div class="faq-wrapper reveal">
+                <h2 class="section-title">FAQ</h2>
+                <div class="faq-grid">
+                    <div class="faq-item">
+                        <h4>Is this "one-click hacking"?</h4>
+                        <p>No. KoppeK is operator-in-the-loop: it organizes workflows, captures evidence, and helps you triage faster — but you stay in control.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h4>Do I need a powerful machine?</h4>
+                        <p>No. Tool execution runs in a container. AI can be remote or local depending on your setup and preferences.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h4>Where does my data go?</h4>
+                        <p>Artifacts stay in your environment. If you enable AI, you bring your own keys and control what gets sent.</p>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -213,18 +671,12 @@
                 <h2 class="section-title">Get in Touch</h2>
                 <p class="contact-text">Interested in KoppeK? Have questions? Let's connect.</p>
                 <div class="contact-links">
-                    <a href="mailto:jacob@koppek.com" class="contact-link email-link">
+                    <a href="mailto:admin@koppek.com" class="contact-link email-link">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <rect x="2" y="4" width="20" height="16" rx="2"/>
                             <path d="M22 6l-10 7L2 6"/>
                         </svg>
-                        jacob@koppek.com
-                    </a>
-                    <a href="https://www.linkedin.com/in/jacob-elias/" target="_blank" rel="noopener noreferrer" class="contact-link linkedin-link">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                        </svg>
-                        LinkedIn
+                        admin@koppek.com
                     </a>
                 </div>
             </div>
@@ -232,9 +684,16 @@
     </main>
 
     <footer class="footer">
-        <p>&copy; 2025 KoppeK. All rights reserved.</p>
+        <p>&copy; 2026 KoppeK. All rights reserved.</p>
     </footer>
 
     <script src="script.js"></script>
 </body>
 </html>
+
+
+<!--
+
+Send this flag to the admin@koppek.com email to get exclusive access to KoppeK!: ZmxhZ3tLb3BwZUtfUnVsZXMsX2FuZF90aGVpcl9jcmVhdG9yc19hcmVfYXdlc29tZSEhIX0=
+
+// -->

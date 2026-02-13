@@ -1,6 +1,6 @@
 /**
  * KoppeK Landing Page
- * - Countdown Timer to December 24, 2025
+ * - Countdown Timer to March 27, 2026 (Private Beta)
  * - Scroll Reveal Animations
  * - App Preview Parallax
  */
@@ -12,8 +12,8 @@
     // Countdown Timer
     // =========================================
     
-    // Target date: December 24, 2025 at midnight
-    const LAUNCH_DATE = new Date('2025-12-24T00:00:00').getTime();
+    // Target date: March 27, 2026 at midnight (Private Beta Launch)
+    const LAUNCH_DATE = new Date('2026-03-27T00:00:00').getTime();
 
     // DOM elements
     const daysEl = document.getElementById('days');
@@ -100,73 +100,6 @@
     }
 
     // =========================================
-    // App Preview Scroll Animation
-    // =========================================
-    
-    /**
-     * Initialize scroll-based animation for app preview
-     */
-    function initAppPreviewAnimation() {
-        const appPreview = document.getElementById('appPreview');
-        if (!appPreview) return;
-
-        const observerOptions = {
-            root: null,
-            rootMargin: '-10% 0px -10% 0px',
-            threshold: [0, 0.25, 0.5, 0.75, 1]
-        };
-
-        const previewObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting && entry.intersectionRatio > 0.25) {
-                    appPreview.classList.add('in-view');
-                } else if (entry.intersectionRatio < 0.1) {
-                    appPreview.classList.remove('in-view');
-                }
-            });
-        }, observerOptions);
-
-        previewObserver.observe(appPreview);
-    }
-
-    // =========================================
-    // Smooth Parallax on App Preview (optional enhancement)
-    // =========================================
-    
-    function initParallax() {
-        const appPreview = document.getElementById('appPreview');
-        if (!appPreview) return;
-
-        let ticking = false;
-
-        window.addEventListener('scroll', () => {
-            if (!ticking) {
-                window.requestAnimationFrame(() => {
-                    const rect = appPreview.getBoundingClientRect();
-                    const windowHeight = window.innerHeight;
-                    
-                    // Calculate how far through the viewport the element is
-                    const progress = (windowHeight - rect.top) / (windowHeight + rect.height);
-                    
-                    if (progress > 0 && progress < 1) {
-                        // Subtle rotation based on scroll position
-                        const rotateX = 10 - (progress * 15);
-                        const translateY = 50 - (progress * 70);
-                        const opacity = 0.5 + (progress * 0.5);
-                        
-                        appPreview.style.transform = `rotateX(${Math.max(0, rotateX)}deg) translateY(${Math.max(0, translateY)}px)`;
-                        appPreview.style.opacity = Math.min(1, opacity);
-                    }
-                    
-                    ticking = false;
-                });
-                
-                ticking = true;
-            }
-        }, { passive: true });
-    }
-
-    // =========================================
     // Video Fallback Handler
     // =========================================
     
@@ -239,6 +172,231 @@
     }
 
     // =========================================
+    // Screenshots Carousel
+    // =========================================
+    
+    function initCarousel() {
+        const track = document.getElementById('carouselTrack');
+        const prevBtn = document.getElementById('carouselPrev');
+        const nextBtn = document.getElementById('carouselNext');
+        const dotsContainer = document.getElementById('carouselDots');
+        
+        if (!track || !prevBtn || !nextBtn || !dotsContainer) return;
+        
+        const slides = track.querySelectorAll('.carousel-slide');
+        const dots = dotsContainer.querySelectorAll('.carousel-dot');
+        const totalSlides = slides.length;
+        let currentIndex = 0;
+        let autoPlayInterval = null;
+        
+        /**
+         * Go to a specific slide
+         */
+        function goToSlide(index) {
+            if (index < 0) index = totalSlides - 1;
+            if (index >= totalSlides) index = 0;
+            
+            currentIndex = index;
+            track.style.transform = `translateX(-${currentIndex * 100}%)`;
+            
+            // Update dots
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentIndex);
+            });
+        }
+        
+        /**
+         * Go to next slide
+         */
+        function nextSlide() {
+            goToSlide(currentIndex + 1);
+        }
+        
+        /**
+         * Go to previous slide
+         */
+        function prevSlide() {
+            goToSlide(currentIndex - 1);
+        }
+        
+        /**
+         * Start auto-play
+         */
+        function startAutoPlay() {
+            stopAutoPlay();
+            autoPlayInterval = setInterval(nextSlide, 5000);
+        }
+        
+        /**
+         * Stop auto-play
+         */
+        function stopAutoPlay() {
+            if (autoPlayInterval) {
+                clearInterval(autoPlayInterval);
+                autoPlayInterval = null;
+            }
+        }
+        
+        // Event listeners
+        prevBtn.addEventListener('click', () => {
+            prevSlide();
+            startAutoPlay(); // Reset timer on manual navigation
+        });
+        
+        nextBtn.addEventListener('click', () => {
+            nextSlide();
+            startAutoPlay();
+        });
+        
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                goToSlide(index);
+                startAutoPlay();
+            });
+        });
+        
+        // Pause on hover
+        track.addEventListener('mouseenter', stopAutoPlay);
+        track.addEventListener('mouseleave', startAutoPlay);
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            const carouselSection = document.querySelector('.carousel-section');
+            const rect = carouselSection.getBoundingClientRect();
+            const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+            
+            if (isVisible) {
+                if (e.key === 'ArrowLeft') {
+                    prevSlide();
+                    startAutoPlay();
+                } else if (e.key === 'ArrowRight') {
+                    nextSlide();
+                    startAutoPlay();
+                }
+            }
+        });
+        
+        // Touch/swipe support
+        let touchStartX = 0;
+        let touchEndX = 0;
+        
+        track.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+            stopAutoPlay();
+        }, { passive: true });
+        
+        track.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+            startAutoPlay();
+        }, { passive: true });
+        
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = touchStartX - touchEndX;
+            
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0) {
+                    nextSlide();
+                } else {
+                    prevSlide();
+                }
+            }
+        }
+        
+        // Start auto-play (skip if reduced motion preference)
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            startAutoPlay();
+        }
+    }
+
+    // =========================================
+    // Reviews Carousel
+    // =========================================
+    
+    function initReviewsCarousel() {
+        const track = document.querySelector('.reviews-carousel-track');
+        const slides = document.querySelectorAll('.review-slide');
+        const prevBtn = document.querySelector('.reviews-carousel-btn.prev');
+        const nextBtn = document.querySelector('.reviews-carousel-btn.next');
+        const dotsContainer = document.querySelector('.reviews-carousel-dots');
+        
+        if (!track || slides.length === 0) return;
+        
+        let currentIndex = 0;
+        let autoplayInterval;
+        
+        // Create dots
+        slides.forEach((_, index) => {
+            const dot = document.createElement('span');
+            dot.classList.add('dot');
+            if (index === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => goToSlide(index));
+            dotsContainer.appendChild(dot);
+        });
+        
+        const dots = dotsContainer.querySelectorAll('.dot');
+        
+        function updateSlides() {
+            slides.forEach((slide, index) => {
+                slide.classList.remove('active', 'prev');
+                if (index === currentIndex) {
+                    slide.classList.add('active');
+                } else if (index < currentIndex) {
+                    slide.classList.add('prev');
+                }
+            });
+            
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentIndex);
+            });
+        }
+        
+        function goToSlide(index) {
+            currentIndex = index;
+            updateSlides();
+            resetAutoplay();
+        }
+        
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % slides.length;
+            updateSlides();
+        }
+        
+        function prevSlide() {
+            currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+            updateSlides();
+        }
+        
+        function startAutoplay() {
+            autoplayInterval = setInterval(nextSlide, 5000);
+        }
+        
+        function resetAutoplay() {
+            clearInterval(autoplayInterval);
+            startAutoplay();
+        }
+        
+        // Event listeners
+        nextBtn.addEventListener('click', () => {
+            nextSlide();
+            resetAutoplay();
+        });
+        
+        prevBtn.addEventListener('click', () => {
+            prevSlide();
+            resetAutoplay();
+        });
+        
+        // Pause on hover
+        track.addEventListener('mouseenter', () => clearInterval(autoplayInterval));
+        track.addEventListener('mouseleave', startAutoplay);
+        
+        // Start autoplay
+        startAutoplay();
+    }
+
+    // =========================================
     // Initialize Everything
     // =========================================
     
@@ -253,19 +411,20 @@
         // Initialize video modal
         initVideoModal();
         
+        // Initialize screenshots carousel
+        initCarousel();
+        
+        // Initialize reviews carousel
+        initReviewsCarousel();
+        
         // Initialize scroll animations
         initScrollReveal();
-        initAppPreviewAnimation();
-        
-        // Enable parallax only if user hasn't requested reduced motion
-        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-            initParallax();
-        }
         
         // Add transition for countdown values
         document.querySelectorAll('.countdown-value').forEach(el => {
             el.style.transition = 'transform 0.1s ease-out';
         });
+        
     }
 
     // Start when DOM is ready
