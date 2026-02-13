@@ -390,10 +390,18 @@ main {
     transition: all 0.3s var(--transition-smooth);
 }
 
+.secondary-btn span {
+    color: inherit;
+}
+
 .secondary-btn:hover {
     background: var(--accent-primary);
     color: var(--bg-primary);
     box-shadow: 0 0 30px rgba(0, 255, 200, 0.3);
+}
+
+.secondary-btn:hover span {
+    color: var(--bg-primary);
 }
 
 .secondary-btn:active {
@@ -470,8 +478,9 @@ main {
 }
 
 .why-wrapper {
-    max-width: 900px;
+    max-width: 1000px;
     margin: 0 auto;
+    padding: 0 1rem;
 }
 
 .why-grid {
@@ -479,6 +488,7 @@ main {
     grid-template-columns: repeat(3, 1fr);
     gap: 1.5rem;
     margin-top: 2.5rem;
+    width: 100%;
 }
 
 .why-card {
