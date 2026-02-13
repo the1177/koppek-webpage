@@ -184,6 +184,8 @@
         if (!track || !prevBtn || !nextBtn || !dotsContainer) return;
         
         const slides = track.querySelectorAll('.carousel-slide');
+        if (slides.length === 0) return;
+        
         const dots = dotsContainer.querySelectorAll('.carousel-dot');
         const totalSlides = slides.length;
         let currentIndex = 0;
@@ -321,7 +323,7 @@
         const nextBtn = document.querySelector('.reviews-carousel-btn.next');
         const dotsContainer = document.querySelector('.reviews-carousel-dots');
         
-        if (!track || slides.length === 0) return;
+        if (!track || slides.length === 0 || !prevBtn || !nextBtn || !dotsContainer) return;
         
         let currentIndex = 0;
         let autoplayInterval;
