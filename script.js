@@ -226,7 +226,10 @@
          */
         function startAutoPlay() {
             stopAutoPlay();
-            autoPlayInterval = setInterval(nextSlide, 5000);
+            // Slower autoplay on mobile for better performance
+            const isMobile = window.innerWidth <= 768;
+            const interval = isMobile ? 7000 : 5000;
+            autoPlayInterval = setInterval(nextSlide, interval);
         }
         
         /**
@@ -371,7 +374,10 @@
         }
         
         function startAutoplay() {
-            autoplayInterval = setInterval(nextSlide, 5000);
+            // Slower autoplay on mobile for better performance
+            const isMobile = window.innerWidth <= 768;
+            const interval = isMobile ? 6000 : 5000;
+            autoplayInterval = setInterval(nextSlide, interval);
         }
         
         function resetAutoplay() {

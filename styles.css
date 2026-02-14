@@ -77,6 +77,9 @@ body {
     animation: matrix-fall var(--duration) linear var(--delay) infinite;
     writing-mode: vertical-rl;
     text-orientation: upright;
+    will-change: transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
 }
 
 .matrix-column::before {
@@ -1889,6 +1892,89 @@ main {
 
 /* Mobile */
 @media (max-width: 768px) {
+    /* Performance: Reduce matrix rain on mobile */
+    .matrix-bg {
+        opacity: 0.3;
+    }
+    
+    .matrix-column {
+        animation-duration: 25s !important;
+        text-shadow: 0 0 5px var(--accent-primary);
+    }
+    
+    .matrix-column.layer2 {
+        display: none;
+    }
+    
+    /* Hide most matrix columns on mobile - keep only every 5th */
+    .matrix-column:nth-child(5n+1),
+    .matrix-column:nth-child(5n+2),
+    .matrix-column:nth-child(5n+3),
+    .matrix-column:nth-child(5n+4) {
+        display: none;
+    }
+    
+    .matrix-column:nth-child(5n) {
+        display: block;
+    }
+    
+    /* Simplify text shadows on mobile */
+    .title,
+    .section-title,
+    .feature-headline {
+        text-shadow: none;
+    }
+    
+    /* Performance: Simplify animations */
+    .rainbow-text {
+        animation: none;
+        background: var(--accent-primary);
+        -webkit-background-clip: text;
+        background-clip: text;
+    }
+    
+    .rainbow-btn {
+        animation: none;
+        background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+        background-size: 100% 100%;
+    }
+    
+    /* Performance: Reduce box shadows and glows */
+    .carousel-image-wrapper,
+    .autopwnr-image-wrapper-large,
+    .review-card,
+    .capability-card,
+    .why-card {
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+    
+    /* Performance: Disable hover transforms on touch */
+    .carousel-slide:hover .carousel-image,
+    .autopwnr-image-wrapper-large:hover .autopwnr-image,
+    .review-card:hover,
+    .capability-card:hover,
+    .why-card:hover,
+    .autopwnr-feature-card:hover {
+        transform: none;
+    }
+    
+    /* Smooth scrolling for touch */
+    .carousel-track,
+    .reviews-carousel-track {
+        -webkit-overflow-scrolling: touch;
+        scroll-behavior: smooth;
+    }
+    
+    /* Reduce transition complexity on mobile */
+    .reveal {
+        transition: opacity 0.4s ease;
+        transform: none !important;
+    }
+    
+    .reveal.visible {
+        opacity: 1;
+    }
+    
     .countdown {
         gap: 0.75rem;
     }
