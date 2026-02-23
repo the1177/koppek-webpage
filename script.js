@@ -226,10 +226,10 @@
          */
         function startAutoPlay() {
             stopAutoPlay();
-            // Slower autoplay on mobile for better performance
+            // Disable autoplay on mobile for better performance
             const isMobile = window.innerWidth <= 768;
-            const interval = isMobile ? 7000 : 5000;
-            autoPlayInterval = setInterval(nextSlide, interval);
+            if (isMobile) return;
+            autoPlayInterval = setInterval(nextSlide, 5000);
         }
         
         /**
@@ -374,10 +374,10 @@
         }
         
         function startAutoplay() {
-            // Slower autoplay on mobile for better performance
+            // Disable autoplay on mobile for better performance
             const isMobile = window.innerWidth <= 768;
-            const interval = isMobile ? 6000 : 5000;
-            autoplayInterval = setInterval(nextSlide, interval);
+            if (isMobile) return;
+            autoplayInterval = setInterval(nextSlide, 5000);
         }
         
         function resetAutoplay() {
@@ -405,13 +405,54 @@
     }
 
     // =========================================
+    // Deep Dive Modal (Architecture / AutoPWNR)
+    // =========================================
+
+    function initDeepDiveModal() {
+        const modal = document.getElementById('deepdiveModal');
+        const backdrop = document.getElementById('deepdiveModalBackdrop');
+        const closeBtn = document.getElementById('deepdiveModalClose');
+        const iframe = document.getElementById('deepdiveIframe');
+
+        if (!modal || !iframe) return;
+
+        document.querySelectorAll('[data-modal-url]').forEach(card => {
+            card.addEventListener('click', (e) => {
+                e.preventDefault();
+                const url = card.getAttribute('data-modal-url');
+                iframe.src = url;
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        function closeModal() {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+            // Delay clearing src so iframe doesn't flash on close animation
+            setTimeout(() => { iframe.src = ''; }, 200);
+        }
+
+        backdrop.addEventListener('click', closeModal);
+        closeBtn.addEventListener('click', closeModal);
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                closeModal();
+            }
+        });
+    }
+
+    // =========================================
     // Initialize Everything
     // =========================================
     
     function init() {
-        // Start countdown
+        const isMobile = window.innerWidth <= 768;
+        
+        // Start countdown (less frequent updates on mobile)
         updateCountdown();
-        setInterval(updateCountdown, 1000);
+        setInterval(updateCountdown, isMobile ? 2000 : 1000);
         
         // Initialize video with fallback
         initVideoFallback();
@@ -424,15 +465,26 @@
         
         // Initialize reviews carousel
         initReviewsCarousel();
+
+        // Initialize deep dive modal
+        initDeepDiveModal();
         
-        // Initialize scroll animations
-        initScrollReveal();
+        // Initialize scroll animations (skip on mobile for performance)
+        if (!isMobile) {
+            initScrollReveal();
+        } else {
+            // On mobile, just show everything immediately
+            document.querySelectorAll('.reveal').forEach(el => {
+                el.classList.add('visible');
+            });
+        }
         
-        // Add transition for countdown values
-        document.querySelectorAll('.countdown-value').forEach(el => {
-            el.style.transition = 'transform 0.1s ease-out';
-        });
-        
+        // Add transition for countdown values (skip on mobile)
+        if (!isMobile) {
+            document.querySelectorAll('.countdown-value').forEach(el => {
+                el.style.transition = 'transform 0.1s ease-out';
+            });
+        }
     }
 
     // Start when DOM is ready

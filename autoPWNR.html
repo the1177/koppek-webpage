@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoPWNR Workflow | Beta 1.0.2</title>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/font/lucide.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@500;700&display=swap');
+        
+        body { 
+            background-color: #08080a; 
+            color: #f1f5f9; 
+            font-family: 'Inter', sans-serif;
+            background-image: linear-gradient(to bottom, #08080a, #0c0c11);
+        }
+
+        .step-card {
+            background: rgba(20, 20, 25, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .step-card.active {
+            border-color: #3b82f6;
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.15);
+            transform: translateX(10px);
+        }
+
+        .step-number {
+            font-family: 'JetBrains Mono', monospace;
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+        }
+
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        
+        /* Remove all italics */
+        * { font-style: normal !important; }
+
+        .scan-line {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #3b82f6, transparent);
+            position: absolute;
+            width: 100%;
+            top: 0;
+            animation: scan 3s linear infinite;
+        }
+
+        @keyframes scan {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(100vh); }
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        const GeminiSimulation = () => {
+            const [target, setTarget] = useState("192.168.1.105");
+            const [loading, setLoading] = useState(false);
+            const [result, setResult] = useState(null);
+            const [error, setError] = useState(null);
+
+            const runSimulation = async () => {
+                setLoading(true);
+                setError(null);
+                const apiKey = ""; // Runtime provides this
+                
+                const prompt = `You are the KoppeK AutoPWNR AI Agent. 
+                Target: ${target}
+                Objective: Reconnaissance and Planning.
+                Provide a JSON response with: "phase", "reasoning", "recommended_tool", "command".`;
+
+                try {
+                    let response;
+                    let retries = 0;
+                    const maxRetries = 5;
+                    
+                    while (retries < maxRetries) {
+                        try {
+                            response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({
+                                    contents: [{ parts: [{ text: prompt }] }]
+                                })
+                            });
+                            if (response.ok) break;
+                        } catch (e) {}
+                        retries++;
+                        await new Promise(res => setTimeout(res, Math.pow(2, retries) * 1000));
+                    }
+
+                    if (!response || !response.ok) throw new Error("API Connection Failed");
+                    const data = await response.json();
+                    const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
+                    setResult(text);
+                } catch (err) {
+                    setError("Could not reach LLM Backend. Ensure Gemini API is available.");
+                } finally {
+                    setLoading(false);
+                }
+            };
+
+            return (
+                <div className="mt-12 p-8 bg-blue-500/5 border border-blue-500/20 rounded-2xl relative overflow-hidden">
+                    <div className="scan-line opacity-20"></div>
+                    <div className="relative z-10">
+                        <div className="flex items-center gap-3 mb-6">
+                            <div className="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center">
+                                <i data-lucide="bot" className="text-black w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h3 className="text-xl font-black text-white uppercase tracking-tighter">Live Agent Intelligence</h3>
+                                <p className="text-[10px] font-bold text-blue-400 uppercase tracking-widest">Powered by Gemini 2.5 Flash</p>
+                            </div>
+                        </div>
+
+                        <div className="flex gap-4 mb-6">
+                            <input 
+                                value={target}
+                                onChange={(e) => setTarget(e.target.value)}
+                                className="bg-black/40 border border-white/10 rounded-lg px-4 py-2 text-sm mono flex-1 focus:border-blue-500 outline-none"
+                                placeholder="Target IP or Domain..."
+                            />
+                            <button 
+                                onClick={runSimulation}
+                                disabled={loading}
+                                className="bg-blue-600 hover:bg-blue-700 text-white font-black text-xs uppercase px-6 py-2 rounded-lg transition-all disabled:opacity-50"
+                            >
+                                {loading ? 'Planning...' : 'Generate Plan'}
+                            </button>
+                        </div>
+
+                        {error && <div className="p-4 bg-rose-500/10 border border-rose-500/20 rounded-lg text-rose-400 text-xs font-bold mb-4">{error}</div>}
+                        
+                        {result && (
+                            <div className="bg-black/60 border border-white/5 p-6 rounded-xl mono text-[12px] text-emerald-400 leading-relaxed max-h-48 overflow-auto">
+                                <pre className="whitespace-pre-wrap">{result}</pre>
+                            </div>
+                        )}
+                    </div>
+                </div>
+            );
+        };
+
+        const StepBlock = ({ number, title, subtitle, desc, icon, isActive, isSuccess, isWarning }) => (
+            <div className={`step-card p-8 rounded-2xl flex gap-6 ${isActive ? 'active' : ''}`}>
+                <div className={`step-number w-14 h-14 rounded-xl flex items-center justify-center text-xl font-black shrink-0 border border-white/10 ${isActive ? 'text-blue-400' : 'text-slate-600'}`}>
+                    {number}
+                </div>
+                <div className="flex-1">
+                    <div className="flex items-center justify-between mb-2">
+                        <h4 className="text-2xl font-black text-white uppercase tracking-tight">{title}</h4>
+                        <div className={`px-2 py-0.5 rounded text-[8px] font-black uppercase tracking-widest ${isSuccess ? 'bg-emerald-500/20 text-emerald-400' : isWarning ? 'bg-rose-500/20 text-rose-400' : 'bg-slate-500/10 text-slate-500'}`}>
+                            {subtitle}
+                        </div>
+                    </div>
+                    <p className="text-slate-400 text-sm font-medium leading-relaxed mb-4">
+                        {desc}
+                    </p>
+                    <div className="flex items-center gap-2 text-[10px] font-bold text-slate-500 uppercase tracking-wider">
+                        <i data-lucide={icon} className="w-3 h-3"></i>
+                        Process Handled via {number > 3 ? 'Execution Plane' : 'Main Orchestrator'}
+                    </div>
+                </div>
+            </div>
+        );
+
+        const App = () => {
+            useEffect(() => { if (window.lucide) window.lucide.createIcons(); }, []);
+
+            return (
+                <div className="p-12 max-w-5xl mx-auto">
+                    <header className="mb-20">
+                        <div className="flex items-center gap-3 mb-6">
+                            <div className="h-1 w-12 bg-blue-500"></div>
+                            <span className="text-[10px] font-black text-blue-500 uppercase tracking-[0.4em]">Autonomous State Machine</span>
+                        </div>
+                        <h1 className="text-7xl font-black text-white tracking-tighter mb-4">
+                            AutoPWNR <span className="text-slate-700">Workflow</span>
+                        </h1>
+                        <p className="text-slate-500 text-xl font-medium max-w-2xl">
+                            The decision logic behind KoppeK's autonomous hacking agent. 
+                            From initial target ingestion to multi-phase tool execution.
+                        </p>
+                    </header>
+
+                    <div className="space-y-6">
+                        <StepBlock 
+                            number="01" 
+                            title="Session Boot" 
+                            subtitle="Initialization"
+                            icon="play"
+                            isSuccess
+                            desc="The user sends an autopwnr:start IPC signal. The system spawns a new session machine, initializes a Knowledge Graph, and appends a session_start entry to the Journal. Scopes and constraints are verified against local storage."
+                        />
+                        
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <StepBlock 
+                                number="02" 
+                                title="Intelligence Loop" 
+                                subtitle="Planning Phase"
+                                icon="brain"
+                                isActive
+                                desc="The system builds a multi-turn prompt containing previous command history, current scan status, and RAG-retrieved documentation. Gemini 2.5 Flash analyzes the context to determine the next optimal action."
+                            />
+                            <StepBlock 
+                                number="03" 
+                                title="Data Grounding" 
+                                subtitle="Context Retrieval"
+                                icon="search"
+                                isActive
+                                desc="The ragService searches the local Markdown corpus for relevant security tactics. This grounded data is injected into the prompt to ensure the AI uses 'production-grade' methodologies instead of generic hallucinations."
+                            />
+                        </div>
+
+                        <StepBlock 
+                            number="04" 
+                            title="Approval Gate" 
+                            subtitle="Safety Check"
+                            icon="shield-alert"
+                            isWarning
+                            desc="If the LLM selects a destructive tool (e.g., SQLMap, Hydra), the system emits autopwnr:approval-required. The workflow pauses until the user explicitly grants permission, preventing unauthorized or damaging actions."
+                        />
+
+                        <StepBlock 
+                            number="05" 
+                            title="Execution Stream" 
+                            subtitle="Action Phase"
+                            icon="terminal"
+                            desc="Commands are routed through streamShellCommand into the Docker execution plane. STDOUT is captured in real-time and streamed back to the UI via activeStreams, while findings are parsed for CVE and MITRE mapping."
+                        />
+
+                        <StepBlock 
+                            number="06" 
+                            title="Final Reporting" 
+                            subtitle="Terminal State"
+                            icon="check-circle"
+                            isSuccess
+                            desc="Upon completion or error, the session ends with a final journaling sync. The system aggregates all findings, graphs, and command logs into high-fidelity PDF and ZIP exports for the engagement report."
+                        />
+                    </div>
+
+                    <GeminiSimulation />
+
+                    <footer className="mt-24 pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
+                        <div className="flex items-center gap-6">
+                            <div className="flex items-center gap-2">
+                                <div className="w-2 h-2 rounded-full bg-blue-500"></div>
+                                <span className="text-[10px] font-black uppercase text-slate-500">Session Flags Active</span>
+                            </div>
+                            <div className="flex items-center gap-2">
+                                <div className="w-2 h-2 rounded-full bg-emerald-500"></div>
+                                <span className="text-[10px] font-black uppercase text-slate-500">RAG Synced</span>
+                            </div>
+                        </div>
+                        <div className="text-[10px] font-bold text-slate-700 uppercase tracking-widest">
+                            KoppeK Beta 1.0.2 // build_022226
+                        </div>
+                    </footer>
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+</body>
+</html>

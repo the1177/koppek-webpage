@@ -1872,6 +1872,361 @@ main {
 }
 
 /* =============================================
+   BERSERK Section
+   ============================================= */
+.berserk-section {
+    padding: 5rem 2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.berserk-section-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* =============================================
+   BERSERK Callout card
+   ============================================= */
+.berserk-callout {
+    margin: 3rem 0;
+    padding: 2rem 2.5rem;
+    background: linear-gradient(135deg, rgba(255, 107, 107, 0.06), rgba(255, 107, 107, 0.02));
+    border: 1px solid rgba(255, 107, 107, 0.2);
+    border-radius: 16px;
+}
+
+.berserk-callout-content {
+    display: flex;
+    gap: 2.5rem;
+    align-items: center;
+}
+
+.berserk-callout-text {
+    flex: 1;
+    min-width: 0;
+}
+
+.berserk-badge {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent-secondary);
+    background: rgba(255, 107, 107, 0.12);
+    border: 1px solid rgba(255, 107, 107, 0.25);
+    border-radius: 20px;
+    padding: 0.25rem 0.75rem;
+    margin-bottom: 0.75rem;
+}
+
+.berserk-callout-text h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.6rem;
+    color: var(--text-primary);
+}
+
+.berserk-callout-text > p {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.berserk-features {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.berserk-features li {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    padding-left: 1.25rem;
+    position: relative;
+}
+
+.berserk-features li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent-secondary);
+    font-size: 0.75rem;
+    top: 0.1em;
+}
+
+.berserk-callout-visual {
+    flex-shrink: 0;
+    width: 340px;
+}
+
+.berserk-gif {
+    width: 100%;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 107, 107, 0.2);
+    display: block;
+}
+
+/* =============================================
+   Multi-Agent Showcase (inside BERSERK section)
+   ============================================= */
+.multiagent-showcase {
+    margin-top: 2.5rem;
+}
+
+.multiagent-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.multiagent-header h3 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.6rem;
+}
+
+.multiagent-header p {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.multiagent-features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.multiagent-feature {
+    background: rgba(255, 107, 107, 0.04);
+    border: 1px solid rgba(255, 107, 107, 0.12);
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+}
+
+.multiagent-feature-label {
+    display: block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent-secondary);
+    margin-bottom: 0.3rem;
+}
+
+.multiagent-feature-desc {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+.multiagent-image-wrapper {
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.multiagent-image {
+    width: 100%;
+    display: block;
+}
+
+/* =============================================
+   OpenRouter LLM Icon
+   ============================================= */
+.openrouter-icon {
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    color: #a78bfa;
+}
+
+/* =============================================
+   Deep Dive Modal
+   ============================================= */
+.deepdive-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+}
+
+.deepdive-modal.active {
+    display: flex;
+}
+
+.deepdive-modal-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.88);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+}
+
+.deepdive-modal-content {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 1200px;
+    height: 87vh;
+    background: #050507;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.8);
+}
+
+.deepdive-modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 34px;
+    height: 34px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: background 0.2s, color 0.2s;
+}
+
+.deepdive-modal-close:hover {
+    background: rgba(255, 255, 255, 0.16);
+    color: var(--text-primary);
+}
+
+.deepdive-iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+}
+
+/* =============================================
+   Explore In Depth Section
+   ============================================= */
+.explore-section {
+    padding: 5rem 2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.explore-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.explore-intro {
+    color: var(--text-secondary);
+    font-size: 1.05rem;
+    margin-bottom: 2.5rem;
+}
+
+.explore-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    text-align: left;
+}
+
+.explore-card {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 1.75rem;
+    background: var(--bg-card);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: border-color 0.3s var(--transition-smooth), box-shadow 0.3s var(--transition-smooth), transform 0.3s var(--transition-smooth);
+}
+
+.explore-card:hover {
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 30px rgba(0, 255, 200, 0.1);
+    transform: translateY(-3px);
+}
+
+.explore-card-icon {
+    width: 48px;
+    height: 48px;
+    background: rgba(0, 255, 200, 0.08);
+    border: 1px solid rgba(0, 255, 200, 0.15);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.explore-card-icon svg {
+    width: 22px;
+    height: 22px;
+    stroke: var(--accent-primary);
+}
+
+.explore-card-body {
+    flex: 1;
+    min-width: 0;
+}
+
+.explore-card-tag {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent-primary);
+    opacity: 0.7;
+}
+
+.explore-card-body h3 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin: 0.3rem 0 0.4rem;
+    color: var(--text-primary);
+}
+
+.explore-card-body p {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+.explore-card-arrow {
+    font-size: 1.25rem;
+    color: var(--text-muted);
+    transition: color 0.3s var(--transition-smooth), transform 0.3s var(--transition-smooth);
+    flex-shrink: 0;
+}
+
+.explore-card:hover .explore-card-arrow {
+    color: var(--accent-primary);
+    transform: translateX(4px);
+}
+
+/* =============================================
    Responsive Adjustments
    ============================================= */
 
@@ -1892,87 +2247,131 @@ main {
 
 /* Mobile */
 @media (max-width: 768px) {
-    /* Performance: Reduce matrix rain on mobile */
+    /* PERFORMANCE: Completely hide matrix rain on mobile */
     .matrix-bg {
-        opacity: 0.3;
+        display: none !important;
     }
     
-    .matrix-column {
-        animation-duration: 25s !important;
-        text-shadow: 0 0 5px var(--accent-primary);
+    /* PERFORMANCE: Disable ALL animations on mobile */
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.001s !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.2s !important;
     }
     
-    .matrix-column.layer2 {
-        display: none;
+    /* Keep only essential transitions */
+    .carousel-track {
+        transition: transform 0.3s ease !important;
     }
     
-    /* Hide most matrix columns on mobile - keep only every 5th */
-    .matrix-column:nth-child(5n+1),
-    .matrix-column:nth-child(5n+2),
-    .matrix-column:nth-child(5n+3),
-    .matrix-column:nth-child(5n+4) {
-        display: none;
+    .review-slide {
+        transition: opacity 0.3s ease !important;
     }
     
-    .matrix-column:nth-child(5n) {
-        display: block;
-    }
-    
-    /* Simplify text shadows on mobile */
-    .title,
-    .section-title,
-    .feature-headline {
-        text-shadow: none;
-    }
-    
-    /* Performance: Simplify animations */
+    /* Simplify rainbow elements to static colors */
     .rainbow-text {
-        animation: none;
-        background: var(--accent-primary);
-        -webkit-background-clip: text;
-        background-clip: text;
+        background: var(--accent-primary) !important;
+        -webkit-background-clip: text !important;
+        background-clip: text !important;
+        -webkit-text-fill-color: transparent !important;
     }
     
     .rainbow-btn {
-        animation: none;
-        background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-        background-size: 100% 100%;
+        background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)) !important;
+        background-size: 100% 100% !important;
     }
     
-    /* Performance: Reduce box shadows and glows */
+    /* Remove ALL box shadows on mobile */
     .carousel-image-wrapper,
     .autopwnr-image-wrapper-large,
     .review-card,
     .capability-card,
-    .why-card {
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    .why-card,
+    .autopwnr-feature-card,
+    .faq-item,
+    .trust-block,
+    .alpha-change,
+    .workflow-step,
+    .llm-item {
+        box-shadow: none !important;
     }
     
-    /* Performance: Disable hover transforms on touch */
-    .carousel-slide:hover .carousel-image,
-    .autopwnr-image-wrapper-large:hover .autopwnr-image,
-    .review-card:hover,
-    .capability-card:hover,
-    .why-card:hover,
-    .autopwnr-feature-card:hover {
-        transform: none;
+    /* Remove ALL text shadows */
+    .title,
+    .section-title,
+    .feature-headline,
+    .tagline,
+    .subtitle,
+    h1, h2, h3, h4 {
+        text-shadow: none !important;
     }
     
-    /* Smooth scrolling for touch */
-    .carousel-track,
-    .reviews-carousel-track {
-        -webkit-overflow-scrolling: touch;
-        scroll-behavior: smooth;
-    }
-    
-    /* Reduce transition complexity on mobile */
-    .reveal {
-        transition: opacity 0.4s ease;
+    /* Disable ALL hover/transform effects */
+    *:hover {
         transform: none !important;
     }
     
-    .reveal.visible {
-        opacity: 1;
+    /* Simplify borders */
+    .carousel-image-wrapper,
+    .autopwnr-image-wrapper-large {
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    }
+    
+    /* Force GPU layer for scrolling */
+    main {
+        -webkit-overflow-scrolling: touch;
+        overflow-x: hidden;
+    }
+    
+    /* Simplify reveal animations */
+    .reveal {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+    
+    /* Remove glow effects */
+    .countdown-value,
+    .beta-signup-btn,
+    .secondary-btn,
+    .rainbow-btn {
+        box-shadow: none !important;
+    }
+    
+    /* Simplify logo animation */
+    .logo-video {
+        filter: none !important;
+    }
+    
+    /* CSS Containment for better rendering */
+    section {
+        contain: layout style;
+    }
+    
+    .carousel-section,
+    .autopwnr-section,
+    .reviews-section {
+        contain: layout style paint;
+    }
+    
+    /* Reduce paint areas */
+    .carousel-wrapper,
+    .autopwnr-wrapper,
+    .reviews-wrapper {
+        will-change: auto;
+        contain: content;
+    }
+    
+    /* Optimize images */
+    img {
+        content-visibility: auto;
+    }
+    
+    /* Disable backdrop filters except modal */
+    *:not(.deepdive-modal-backdrop):not(.video-modal) {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
     }
     
     .countdown {
@@ -2135,6 +2534,49 @@ main {
         gap: 1rem;
     }
     
+    .berserk-section {
+        padding: 3.5rem 1.5rem;
+    }
+
+    .explore-section {
+        padding: 3.5rem 1.5rem;
+    }
+
+    .explore-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .explore-card {
+        padding: 1.25rem;
+    }
+
+    .berserk-callout {
+        padding: 1.5rem;
+    }
+
+    .berserk-callout-content {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .berserk-callout-visual {
+        width: 100%;
+    }
+
+    .multiagent-features {
+        grid-template-columns: 1fr;
+    }
+
+    .deepdive-modal {
+        padding: 0.75rem;
+    }
+
+    .deepdive-modal-content {
+        height: 90vh;
+        border-radius: 10px;
+    }
+
     .autopwnr-section {
         padding: 3.5rem 1.5rem;
     }
@@ -2203,6 +2645,46 @@ main {
     .feature-list li {
         padding-left: 1.5rem;
         font-size: 0.95rem;
+    }
+    
+    /* Extra small screens - maximum simplification */
+    .carousel-btn {
+        display: none !important;
+    }
+    
+    .reviews-carousel-btn {
+        display: none !important;
+    }
+    
+    .carousel-track-container {
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+    }
+    
+    .carousel-slide {
+        scroll-snap-align: center;
+        flex-shrink: 0;
+    }
+    
+    /* Hide code block on very small screens */
+    .report-code-block {
+        display: none;
+    }
+    
+    .report-sample-desc {
+        margin-bottom: 0;
+    }
+    
+    /* Simplify LLM grid */
+    .llm-grid {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .llm-item {
+        flex-direction: row;
+        min-width: 100%;
+        padding: 0.75rem;
     }
 }
 

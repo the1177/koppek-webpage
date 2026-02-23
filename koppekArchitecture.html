@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KoppeK Topology | Beta 1.0.2</title>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/font/lucide.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@500;700&display=swap');
+        
+        body { 
+            background-color: #050507; 
+            color: #e2e8f0; 
+            margin: 0; 
+            font-family: 'Inter', sans-serif;
+            background-image: radial-gradient(circle at 50% 50%, #111116 0%, #050507 100%);
+        }
+        
+        .glass-card {
+            background: rgba(15, 15, 20, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
+        }
+
+        .neo-border-blue { border-left: 4px solid #3b82f6; }
+        .neo-border-purple { border-left: 4px solid #a855f7; }
+        .neo-border-emerald { border-left: 4px solid #10b981; }
+        .neo-border-rose { border-left: 4px solid #f43f5e; }
+        .neo-border-slate { border-left: 4px solid #64748b; }
+
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        
+        /* Remove all italics */
+        * { font-style: normal !important; }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        const Icon = ({ name, size = 20, className = "" }) => (
+            <i data-lucide={name} className={`lucide lucide-${name} ${className}`} style={{ width: size, height: size }}></i>
+        );
+
+        const SectionHeader = ({ title, subtitle, icon }) => (
+            <div className="flex items-center gap-4 mb-8">
+                <div className="p-3 bg-white/5 rounded-xl border border-white/10">
+                    <Icon name={icon} size={28} className="text-blue-400" />
+                </div>
+                <div>
+                    <h2 className="text-3xl font-black tracking-tighter text-white uppercase">{title}</h2>
+                    <p className="text-slate-500 font-bold uppercase tracking-widest text-[10px]">{subtitle}</p>
+                </div>
+            </div>
+        );
+
+        const LayerCard = ({ title, desc, items, colorClass, icon }) => (
+            <div className={`glass-card rounded-2xl p-8 transition-all hover:border-white/20 ${colorClass}`}>
+                <div className="flex items-center gap-3 mb-6">
+                    <Icon name={icon} className="text-white opacity-50" />
+                    <h3 className="text-xl font-black text-white uppercase tracking-tight">{title}</h3>
+                </div>
+                <p className="text-slate-400 text-sm leading-relaxed mb-8 font-medium">
+                    {desc}
+                </p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    {items.map((item, idx) => (
+                        <div key={idx} className="bg-black/40 border border-white/5 p-4 rounded-xl">
+                            <div className="text-white font-bold text-sm mb-1">{item.name}</div>
+                            <div className="text-slate-500 text-[11px] font-medium leading-snug">{item.info}</div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        );
+
+        const BoxWrapper = ({ title, iconName, children, color = "blue" }) => {
+            const borderColors = {
+                blue: "neo-border-blue",
+                purple: "neo-border-purple",
+                emerald: "neo-border-emerald",
+                rose: "neo-border-rose",
+                slate: "neo-border-slate"
+            };
+            const iconColors = {
+                blue: "text-blue-400",
+                purple: "text-purple-400",
+                emerald: "text-emerald-400",
+                rose: "text-rose-400",
+                slate: "text-slate-400"
+            };
+            return (
+                <div className={`glass-card rounded-2xl p-8 transition-all hover:border-white/20 ${borderColors[color]}`}>
+                    <div className="flex items-center gap-3 mb-6 border-b border-white/5 pb-4">
+                        <Icon name={iconName} className={iconColors[color]} />
+                        <h3 className="text-xl font-black text-white uppercase tracking-tight">{title}</h3>
+                    </div>
+                    <div>{children}</div>
+                </div>
+            );
+        };
+
+        const App = () => {
+            useEffect(() => { if (window.lucide) window.lucide.createIcons(); }, []);
+
+            return (
+                <div className="min-h-screen p-12 max-w-7xl mx-auto">
+                    {/* Header Block */}
+                    <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-16 gap-8">
+                        <div>
+                            <div className="inline-flex items-center gap-2 px-3 py-1 bg-emerald-500/10 border border-emerald-500/20 rounded-full mb-4">
+                                <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
+                                <span className="text-[10px] font-black text-emerald-500 uppercase tracking-widest">System Status: Operational</span>
+                            </div>
+                            <h1 className="text-6xl font-black text-white tracking-tighter mb-2">
+                                KOPPEK <span className="text-blue-500 uppercase">Architecture</span>
+                            </h1>
+                            <p className="text-slate-400 text-lg font-medium">Production Topology & Process Orchestration // Beta 1.0.2</p>
+                        </div>
+                        <div className="flex flex-col items-end text-right">
+                            <div className="text-slate-600 font-mono text-xs mb-1">BUILD_ID: 2026_02_22_RELEASE</div>
+                            <div className="text-blue-400 font-black text-sm tracking-widest uppercase">authorized access only</div>
+                        </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        {/* Layer 1: Renderer */}
+                        <LayerCard 
+                            title="1. Renderer Process"
+                            icon="layout"
+                            colorClass="neo-border-blue"
+                            desc="The high-performance React frontend. It handles state visualization and real-time terminal streaming using Xterm.js components."
+                            items={[
+                                { name: "App.tsx", info: "The secure root container managing navigation and context providers." },
+                                { name: "RunningTasksPanel", info: "A live process monitor that hooks into the ActiveStreams registry." },
+                                { name: "Custom Hooks", info: "useScan and useLLM encapsulate complex IPC request/response cycles." },
+                                { name: "StatusBar", info: "Monitors Docker health and backend service connectivity." }
+                            ]}
+                        />
+
+                        {/* Layer 2: Preload */}
+                        <LayerCard 
+                            title="2. Preload Bridge"
+                            icon="shield"
+                            colorClass="neo-border-slate"
+                            desc="The context-isolated security layer. It prevents the UI from accessing Node.js directly while exposing safe IPC domains."
+                            items={[
+                                { name: "ContextBridge", info: "Hardened exposure of window.api to the renderer process." },
+                                { name: "Domain Isolation", info: "Separates Nmap, LLM, and Storage into strict permissioned silos." },
+                                { name: "Validation", info: "Sanitizes payloads before they cross the process boundary." },
+                                { name: "Event Marshalling", info: "Routes main-process events back to specific React components." }
+                            ]}
+                        />
+
+                        {/* Layer 3: Main Process */}
+                        <LayerCard 
+                            title="3. Main Orchestrator"
+                            icon="cpu"
+                            colorClass="neo-border-purple"
+                            desc="The centralized backend controller. It manages window lifecycles, file system access, and the system state machine."
+                            items={[
+                                { name: "IPC Handlers", info: "The main src/main/main.ts registry for all incoming API requests." },
+                                { name: "ActiveStreams", info: "Registry tracking all PTY and Tool outputs to prevent memory leaks." },
+                                { name: "Bootstrap FSM", info: "A finite state machine ensuring Docker and dependencies are ready." },
+                                { name: "Cleanup Logic", info: "Automated teardown of processes upon window close or abort." }
+                            ]}
+                        />
+
+                        {/* Layer 4: Execution Plane */}
+                        <LayerCard 
+                            title="4. Execution Plane"
+                            icon="terminal"
+                            colorClass="neo-border-rose"
+                            desc="Where the security operations occur. Supports both direct container execution and LLM-driven Model Context Protocol (MCP)."
+                            items={[
+                                { name: "CLI Mode", info: "Direct PTY streaming into the koppek-kali container environment." },
+                                { name: "MCP Mode", info: "Autonomous execution via the mcpClient -> execute_command tool." },
+                                { name: "Docker Manager", info: "Handles container lifecycle, image updates, and networking." },
+                                { name: "Terminal Multiplexer", info: "Allows multiple concurrent shell sessions in one view." }
+                            ]}
+                        />
+
+                        {/* Layer 5: Services */}
+                        <div className="lg:col-span-2">
+                            <BoxWrapper title="5. Logic & Intelligence Services" iconName="bot" color="purple">
+                                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                    <div className="p-4 bg-white/5 rounded-xl border border-white/10">
+                                        <div className="text-white font-bold text-sm mb-2">LLM Ecosystem</div>
+                                        <div className="text-slate-500 text-[10px] font-medium leading-relaxed">
+                                            Gemini 2.5, Claude, and Ollama integration via backendFactory. Monitors token usage and context windows.
+                                        </div>
+                                    </div>
+                                    <div className="p-4 bg-white/5 rounded-xl border border-white/10">
+                                        <div className="text-white font-bold text-sm mb-2">RAG Engine</div>
+                                        <div className="text-slate-500 text-[10px] font-medium leading-relaxed">
+                                            ragService indexes the knowledge corpus (Markdown) to ground LLM responses in real-world docs.
+                                        </div>
+                                    </div>
+                                    <div className="p-4 bg-white/5 rounded-xl border border-white/10">
+                                        <div className="text-white font-bold text-sm mb-2">AutoPwnr Core</div>
+                                        <div className="text-slate-500 text-[10px] font-medium leading-relaxed">
+                                            Autonomous state management for phase-based attacks (Recon - Enumeration - Exploitation).
+                                        </div>
+                                    </div>
+                                    <div className="p-4 bg-white/5 rounded-xl border border-white/10">
+                                        <div className="text-white font-bold text-sm mb-2">Findings Graph</div>
+                                        <div className="text-slate-500 text-[10px] font-medium leading-relaxed">
+                                            Dynamically maps tool output to MITRE ATT&CK techniques and CVE data.
+                                        </div>
+                                    </div>
+                                </div>
+                            </BoxWrapper>
+                        </div>
+
+                        {/* Layer 6: Data Plane */}
+                        <div className="lg:col-span-2">
+                            <BoxWrapper title="6. Persistence & Knowledge" iconName="database" color="emerald">
+                                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                    <div className="bg-black/40 p-5 rounded-xl border border-white/5">
+                                        <div className="text-white font-bold text-sm uppercase mb-2">Configuration</div>
+                                        <div className="text-slate-500 text-[11px] font-medium">electron-store (koppek-secure) encrypts API keys and local preferences.</div>
+                                    </div>
+                                    <div className="bg-black/40 p-5 rounded-xl border border-white/5">
+                                        <div className="text-white font-bold text-sm uppercase mb-2">Engagement</div>
+                                        <div className="text-slate-500 text-[11px] font-medium">Session-scoped records including tool scans and raw output dumps.</div>
+                                    </div>
+                                    <div className="bg-black/40 p-5 rounded-xl border border-white/5">
+                                        <div className="text-white font-bold text-sm uppercase mb-2">The Journal</div>
+                                        <div className="text-slate-500 text-[11px] font-medium">Live JOURNAL.md stream recording every shell command and LLM thought.</div>
+                                    </div>
+                                    <div className="bg-black/40 p-5 rounded-xl border border-white/5">
+                                        <div className="text-white font-bold text-sm uppercase mb-2">Exports</div>
+                                        <div className="text-slate-500 text-[11px] font-medium">High-fidelity PDF, ZIP, and Markdown exports for client delivery.</div>
+                                    </div>
+                                </div>
+                            </BoxWrapper>
+                        </div>
+                    </div>
+
+                    <footer className="mt-24 pt-8 border-t border-white/10 flex justify-between items-center text-[10px] font-bold text-slate-600 uppercase tracking-[0.3em]">
+                        <div>KoppeK Systems // Topology Monitor</div>
+                        <div>Process Isolation: Active</div>
+                    </footer>
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+</body>
+</html>

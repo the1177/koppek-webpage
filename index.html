@@ -176,6 +176,53 @@
             </div>
         </section>
 
+        <!-- BERSERK Mode Section -->
+        <section class="berserk-section">
+            <div class="berserk-section-wrapper reveal">
+                <div class="berserk-callout">
+                    <div class="berserk-callout-content">
+                        <div class="berserk-callout-text">
+                            <div class="berserk-badge">New in Beta</div>
+                            <h3>BERSERK Mode</h3>
+                            <p>Multiple LLM backends run simultaneously — Claude, Codex, and Gemini each attack independently, then merge into a consensus plan with per-agent agreement scores.</p>
+                            <ul class="berserk-features">
+                                <li>Parallel multi-agent execution across all configured backends</li>
+                                <li>Consensus-based plan merging with confidence scoring</li>
+                                <li>Per-agent reasoning visible in the Agents tab grid</li>
+                                <li>Pause / Resume — checkpoint any session mid-phase</li>
+                            </ul>
+                        </div>
+                        <div class="berserk-callout-visual">
+                            <img src="assets/berserkPWNR.gif" alt="BERSERK multi-agent mode in action" class="berserk-gif">
+                        </div>
+                    </div>
+                <!-- Multi-Agent Screenshot -->
+                <div class="multiagent-showcase">
+                    <div class="multiagent-header">
+                        <h3>Multi-LLM Agent Architecture</h3>
+                        <p>Each configured backend receives the same target and objectives — they reason independently in parallel. KoppeK then merges their outputs into a single high-confidence attack plan. Where agents disagree, divergence scores surface uncertainty so you stay informed.</p>
+                    </div>
+                    <div class="multiagent-features">
+                        <div class="multiagent-feature">
+                            <span class="multiagent-feature-label">Agent Grid</span>
+                            <span class="multiagent-feature-desc">Watch each LLM's live reasoning side-by-side in the Agents tab</span>
+                        </div>
+                        <div class="multiagent-feature">
+                            <span class="multiagent-feature-label">Consensus Merge</span>
+                            <span class="multiagent-feature-desc">Plans scored and merged — higher agreement means higher confidence in the next step</span>
+                        </div>
+                        <div class="multiagent-feature">
+                            <span class="multiagent-feature-label">Backend Coverage</span>
+                            <span class="multiagent-feature-desc">Claude Code CLI, Codex CLI, OpenAI / Gemini / Claude API — all at once</span>
+                        </div>
+                    </div>
+                    <div class="multiagent-image-wrapper">
+                        <img src="assets/multiAgent.png" alt="BERSERK multi-agent mode showing parallel LLM execution" class="multiagent-image">
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Auto PWNR Section -->
         <section class="autopwnr-section">
             <div class="autopwnr-wrapper reveal">
@@ -246,6 +293,15 @@
                             </div>
                             <span class="llm-name">Ollama</span>
                             <span class="llm-desc">Local models, check documentation</span>
+                        </div>
+                        <div class="llm-item">
+                            <div class="llm-icon openrouter-icon">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M21.928 13.025a2.035 2.035 0 0 0 0-2.05L17.17 2.439A2.035 2.035 0 0 0 15.408 1.5H8.592a2.035 2.035 0 0 0-1.763 1.015l-4.757 8.46a2.035 2.035 0 0 0 0 2.05l4.757 8.46A2.035 2.035 0 0 0 8.592 22.5h6.816a2.035 2.035 0 0 0 1.763-1.015zM12 16.5a4.5 4.5 0 1 1 0-9 4.5 4.5 0 0 1 0 9zm0-2.5a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/>
+                                </svg>
+                            </div>
+                            <span class="llm-name">OpenRouter</span>
+                            <span class="llm-desc">Any model, one API</span>
                         </div>
                     </div>
                     <p class="llm-note">Bring your own API keys. Your prompts, your control.</p>
@@ -386,6 +442,36 @@ Recommending password reset and parameterized queries."</span></code></pre>
                                     <p>Professional penetration testing reports with findings, evidence, and risk ratings — ready for delivery.</p>
                                 </div>
                             </div>
+
+                            <div class="carousel-slide">
+                                <div class="carousel-image-wrapper">
+                                    <img src="assets/multiAgent.png" alt="Multi-Agent Orchestration" class="carousel-image">
+                                </div>
+                                <div class="carousel-caption">
+                                    <h3>Multi-Agent Orchestration</h3>
+                                    <p>BERSERK coordinates multiple AI agents simultaneously — each attacking the target independently for maximum coverage.</p>
+                                </div>
+                            </div>
+
+                            <div class="carousel-slide">
+                                <div class="carousel-image-wrapper">
+                                    <img src="assets/playWritghtplan.png" alt="Playwright AI Plan Generation" class="carousel-image">
+                                </div>
+                                <div class="carousel-caption">
+                                    <h3>AI-Generated Playwright Plans</h3>
+                                    <p>Describe your web target in plain language — KoppeK generates a complete browser automation script ready to execute.</p>
+                                </div>
+                            </div>
+
+                            <div class="carousel-slide">
+                                <div class="carousel-image-wrapper">
+                                    <img src="assets/playWright.png" alt="Playwright Browser Automation" class="carousel-image">
+                                </div>
+                                <div class="carousel-caption">
+                                    <h3>Playwright Browser Automation</h3>
+                                    <p>AI-generated scripts run against live targets — form injection, session extraction, and authenticated flow testing.</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     
@@ -403,6 +489,48 @@ Recommending password reset and parameterized queries."</span></code></pre>
                     <button class="carousel-dot" data-index="3" aria-label="Go to slide 4"></button>
                     <button class="carousel-dot" data-index="4" aria-label="Go to slide 5"></button>
                     <button class="carousel-dot" data-index="5" aria-label="Go to slide 6"></button>
+                    <button class="carousel-dot" data-index="6" aria-label="Go to slide 7"></button>
+                    <button class="carousel-dot" data-index="7" aria-label="Go to slide 8"></button>
+                    <button class="carousel-dot" data-index="8" aria-label="Go to slide 9"></button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Explore In Depth Section -->
+        <section class="explore-section">
+            <div class="explore-wrapper reveal">
+                <h2 class="section-title">Explore <span class="highlight-alt">In Depth</span></h2>
+                <p class="explore-intro">Deep-dive into how KoppeK is built and how the autonomous agent operates.</p>
+                <div class="explore-grid">
+                    <a href="#" class="explore-card" data-modal-url="koppekArchitecture.html">
+                        <div class="explore-card-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2">
+                                <rect x="2" y="3" width="20" height="14" rx="2"/>
+                                <line x1="8" y1="21" x2="16" y2="21"/>
+                                <line x1="12" y1="17" x2="12" y2="21"/>
+                            </svg>
+                        </div>
+                        <div class="explore-card-body">
+                            <span class="explore-card-tag">Architecture</span>
+                            <h3>System Topology</h3>
+                            <p>Renderer, Preload Bridge, Main Orchestrator, Execution Plane, and Intelligence Services — all visualized.</p>
+                        </div>
+                        <div class="explore-card-arrow">→</div>
+                    </a>
+                    <a href="#" class="explore-card" data-modal-url="autoPWNR.html">
+                        <div class="explore-card-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <polygon points="10 8 16 12 10 16 10 8"/>
+                            </svg>
+                        </div>
+                        <div class="explore-card-body">
+                            <span class="explore-card-tag">Workflow</span>
+                            <h3>AutoPWNR State Machine</h3>
+                            <p>From session boot to final report — the complete 6-phase autonomous hacking workflow with live agent intelligence demo.</p>
+                        </div>
+                        <div class="explore-card-arrow">→</div>
+                    </a>
                 </div>
             </div>
         </section>
@@ -596,6 +724,47 @@ Recommending password reset and parameterized queries."</span></code></pre>
                         <span class="capability-name">Responsible Guardrails</span>
                         <span class="capability-desc">Operator confirmations, scope-aware behavior, and safety controls for authorized testing.</span>
                     </div>
+
+                    <div class="capability-card">
+                        <div class="capability-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="6" cy="12" r="3"></circle>
+                                <circle cx="18" cy="6" r="3"></circle>
+                                <circle cx="18" cy="18" r="3"></circle>
+                                <line x1="8.7" y1="10.7" x2="15.3" y2="7.3"></line>
+                                <line x1="8.7" y1="13.3" x2="15.3" y2="16.7"></line>
+                            </svg>
+                        </div>
+                        <span class="capability-name">BERSERK Multi-Agent</span>
+                        <span class="capability-desc">Claude, Codex, and Gemini attack in parallel — results merge into a consensus plan with per-agent scoring.</span>
+                    </div>
+
+                    <div class="capability-card">
+                        <div class="capability-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="2" y="3" width="20" height="14" rx="2"/>
+                                <path d="M8 21h8M12 17v4"/>
+                                <path d="M7 8h2l2 5 2-7 2 5h2"/>
+                            </svg>
+                        </div>
+                        <span class="capability-name">Playwright Automation</span>
+                        <span class="capability-desc">AI-generated browser scripts for web app pentesting — describe a target, get a ready-to-run Playwright script.</span>
+                    </div>
+
+                    <div class="capability-card">
+                        <div class="capability-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="5" r="2"></circle>
+                                <circle cx="5" cy="19" r="2"></circle>
+                                <circle cx="19" cy="19" r="2"></circle>
+                                <line x1="12" y1="7" x2="5" y2="17"></line>
+                                <line x1="12" y1="7" x2="19" y2="17"></line>
+                                <line x1="5" y1="19" x2="19" y2="19"></line>
+                            </svg>
+                        </div>
+                        <span class="capability-name">Findings Graph & MITRE</span>
+                        <span class="capability-desc">Entity graph connecting hosts, ports, CVEs, and MITRE ATT&CK techniques — auto-mapped from tool output.</span>
+                    </div>
                 </div>
 
                 <p class="feature-tagline">
@@ -725,6 +894,15 @@ Recommending password reset and parameterized queries."</span></code></pre>
             </div>
         </section>
     </main>
+
+    <!-- Deep Dive Modal -->
+    <div class="deepdive-modal" id="deepdiveModal">
+        <div class="deepdive-modal-backdrop" id="deepdiveModalBackdrop"></div>
+        <div class="deepdive-modal-content">
+            <button class="deepdive-modal-close" id="deepdiveModalClose" aria-label="Close">✕</button>
+            <iframe class="deepdive-iframe" id="deepdiveIframe" src="" title="KoppeK Deep Dive"></iframe>
+        </div>
+    </div>
 
     <footer class="footer">
         <p>&copy; 2026 KoppeK. All rights reserved.</p>
