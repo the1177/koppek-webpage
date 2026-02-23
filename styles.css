@@ -155,6 +155,7 @@ main {
     justify-content: center;
     padding: 2rem;
     text-align: center;
+    position: relative;
 }
 
 .hero-content {
@@ -164,6 +165,8 @@ main {
     flex-direction: column;
     align-items: center;
     animation: fadeInUp 1s var(--transition-smooth);
+    position: relative;
+    z-index: 1;
 }
 
 @keyframes fadeInUp {
@@ -925,16 +928,21 @@ main {
     font-weight: 700;
 }
 
-/* Reveal Animation */
+/* Reveal Animation — blur-fade inspired by Magic UI */
 .reveal {
     opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 0.8s var(--transition-smooth), transform 0.8s var(--transition-smooth);
+    transform: translateY(28px);
+    filter: blur(10px);
+    transition:
+        opacity 0.75s var(--transition-smooth),
+        transform 0.75s var(--transition-smooth),
+        filter 0.75s var(--transition-smooth);
 }
 
 .reveal.visible {
     opacity: 1;
     transform: translateY(0);
+    filter: blur(0px);
 }
 
 /* =============================================
@@ -2227,6 +2235,201 @@ main {
 }
 
 /* =============================================
+   Magic UI — Inspired Enhancements
+   ============================================= */
+
+/* --- Keyframes --- */
+
+@keyframes btn-shimmer {
+    0%   { transform: translateX(-200%) skewX(-20deg); }
+    100% { transform: translateX(400%)  skewX(-20deg); }
+}
+
+@keyframes dot-grid-pulse {
+    from { opacity: 0.3; }
+    to   { opacity: 0.65; }
+}
+
+@keyframes berserk-glow-pulse {
+    0%,  100% {
+        box-shadow:   none;
+        border-color: rgba(255, 107, 107, 0.2);
+    }
+    50% {
+        box-shadow:   0 0 28px rgba(255, 107, 107, 0.14), 0 0 56px rgba(255, 107, 107, 0.06);
+        border-color: rgba(255, 107, 107, 0.45);
+    }
+}
+
+@keyframes shiny-sweep {
+    0%   { background-position:  200% center; }
+    100% { background-position: -200% center; }
+}
+
+/* --- Hero Animated Dot Grid --- */
+
+.hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, rgba(0, 255, 200, 0.11) 1px, transparent 1px);
+    background-size: 40px 40px;
+    mask-image: radial-gradient(ellipse 72% 65% at 50% 50%, black 15%, transparent 100%);
+    -webkit-mask-image: radial-gradient(ellipse 72% 65% at 50% 50%, black 15%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+    animation: dot-grid-pulse 8s ease-in-out infinite alternate;
+}
+
+/* --- Rainbow Button Shimmer Sweep --- */
+
+.rainbow-btn {
+    overflow: hidden;
+}
+
+.rainbow-btn::after {
+    content: '';
+    position: absolute;
+    top: -10%;
+    left: 0;
+    width: 30%;
+    height: 120%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.22), transparent);
+    animation: btn-shimmer 4.5s ease-in-out infinite;
+    pointer-events: none;
+}
+
+/* --- BERSERK Callout Glow Pulse --- */
+
+.berserk-callout {
+    animation: berserk-glow-pulse 4s ease-in-out infinite;
+}
+
+/* --- Shiny Text Sweep on highlight-alt headings --- */
+
+.section-title .highlight-alt,
+.feature-headline .highlight-alt {
+    background: linear-gradient(
+        90deg,
+        var(--accent-primary) 25%,
+        rgba(200, 255, 240, 0.95) 50%,
+        var(--accent-primary) 75%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shiny-sweep 4s linear infinite;
+}
+
+/* --- Magic Card Spotlight (cursor-tracking gradient via JS --mouse-x/--mouse-y) --- */
+/* Background approach: no stacking-context issues, instant spotlight on hover         */
+
+@media (hover: hover) {
+    .capability-card:hover {
+        background:
+            radial-gradient(
+                320px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+                rgba(0, 255, 200, 0.07),
+                transparent 65%
+            ),
+            var(--bg-card);
+        border-color: rgba(0, 255, 200, 0.42);
+        box-shadow:
+            0 0 0 1px rgba(0, 255, 200, 0.08),
+            0 8px 32px rgba(0, 0, 0, 0.45),
+            0 0 44px rgba(0, 255, 200, 0.08);
+        transform: translateY(-5px);
+    }
+
+    .why-card:hover {
+        background:
+            radial-gradient(
+                280px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+                rgba(0, 255, 200, 0.07),
+                transparent 65%
+            ),
+            var(--bg-card);
+        border-color: rgba(0, 255, 200, 0.38);
+        box-shadow:
+            0 0 0 1px rgba(0, 255, 200, 0.07),
+            0 8px 24px rgba(0, 0, 0, 0.35),
+            0 0 32px rgba(0, 255, 200, 0.07);
+        transform: translateY(-4px);
+    }
+
+    .faq-item:hover {
+        background:
+            radial-gradient(
+                260px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+                rgba(0, 255, 200, 0.06),
+                transparent 65%
+            ),
+            var(--bg-card);
+        border-color: rgba(0, 255, 200, 0.28);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .llm-item:hover {
+        background:
+            radial-gradient(
+                200px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+                rgba(0, 255, 200, 0.08),
+                transparent 65%
+            ),
+            var(--bg-card);
+    }
+
+    .autopwnr-feature-card:hover {
+        background:
+            radial-gradient(
+                240px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+                rgba(0, 255, 200, 0.07),
+                transparent 65%
+            ),
+            rgba(20, 20, 30, 0.6);
+    }
+
+    .multiagent-feature:hover {
+        background:
+            radial-gradient(
+                240px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+                rgba(255, 107, 107, 0.1),
+                transparent 65%
+            ),
+            rgba(255, 107, 107, 0.04);
+        border-color: rgba(255, 107, 107, 0.3);
+    }
+
+    .explore-card:hover {
+        background:
+            radial-gradient(
+                300px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+                rgba(0, 255, 200, 0.07),
+                transparent 65%
+            ),
+            var(--bg-card);
+        border-color: var(--accent-primary);
+        box-shadow: 0 0 30px rgba(0, 255, 200, 0.12);
+        transform: translateY(-3px);
+    }
+}
+
+/* Strip background transitions so gradient appears instantly on enter */
+.capability-card,
+.why-card,
+.faq-item,
+.llm-item,
+.autopwnr-feature-card,
+.multiagent-feature,
+.explore-card {
+    transition:
+        border-color 0.3s var(--transition-smooth),
+        box-shadow   0.3s var(--transition-smooth),
+        transform    0.3s var(--transition-smooth);
+}
+
+/* =============================================
    Responsive Adjustments
    ============================================= */
 
@@ -2329,6 +2532,7 @@ main {
     .reveal {
         opacity: 1 !important;
         transform: none !important;
+        filter: none !important;
     }
     
     /* Remove glow effects */
@@ -2551,6 +2755,25 @@ main {
         padding: 1.25rem;
     }
 
+    .hero::before {
+        display: none;
+    }
+
+    .rainbow-btn::after {
+        display: none;
+    }
+
+    .berserk-callout {
+        animation: none;
+    }
+
+    .section-title .highlight-alt,
+    .feature-headline .highlight-alt {
+        animation: none;
+        background: var(--accent-primary);
+        -webkit-text-fill-color: transparent;
+    }
+
     .berserk-callout {
         padding: 1.5rem;
     }
@@ -2705,6 +2928,7 @@ main {
     .reveal {
         opacity: 1;
         transform: none;
+        filter: none;
         transition: none;
     }
     

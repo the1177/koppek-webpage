@@ -405,6 +405,33 @@
     }
 
     // =========================================
+    // Magic Card — cursor-tracking spotlight
+    // =========================================
+
+    function initMagicCards() {
+        // Only on pointer devices with hover capability
+        if (!window.matchMedia('(hover: hover)').matches) return;
+
+        const selector = [
+            '.capability-card',
+            '.why-card',
+            '.faq-item',
+            '.llm-item',
+            '.autopwnr-feature-card',
+            '.multiagent-feature',
+            '.explore-card'
+        ].join(', ');
+
+        document.querySelectorAll(selector).forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+                card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+            });
+        });
+    }
+
+    // =========================================
     // Deep Dive Modal (Architecture / AutoPWNR)
     // =========================================
 
@@ -468,6 +495,9 @@
 
         // Initialize deep dive modal
         initDeepDiveModal();
+
+        // Initialize Magic Card spotlight
+        initMagicCards();
         
         // Initialize scroll animations (skip on mobile for performance)
         if (!isMobile) {
